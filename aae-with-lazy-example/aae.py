@@ -212,7 +212,8 @@ def main():
     import hashlib
     real_images_info_file_name = hashlib.md5(str(train_loader.dataset).encode()).hexdigest()+'.pickle'
     if os.path.exists('./inception_model_info/' + real_images_info_file_name) : 
-        print("Using 
+        print("Using generated real image info.")
+        print(train_loader.dataset)
         inception_model_score.load_real_images_info('./inception_model_info/' + real_images_info_file_name)
     else : 
         inception_model_score.model_to('cuda')
