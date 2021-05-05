@@ -1,0 +1,6 @@
+easydict
+numpy
+torch==1.5.1
+torchvision
+prdc
+wandb
