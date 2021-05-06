@@ -244,6 +244,7 @@ class GenerativeModelScore:
         self.fake_mu, self.fake_sigma = self.feature_to_mu_sig(self.fake_feature_np)
     
     def clear_fake(self) : 
+        self.fake_images = None
         self.fake_predict_softmax = None
         self.fake_feature = None
         self.fake_mu, self.fake_sigma = None, None
