@@ -99,6 +99,17 @@ class GenerativeModelScore:
             split_scores.append(np.exp(np.mean(scores)))
 
         return np.mean(split_scores), np.std(split_scores)
+    
+    
+    def trainloaderinfo_to_hashedname(self, train_loader) : 
+        import hashlib
+        dataset_info = str(train_loader.dataset).split('\n')
+        name, datapoints, split = dataset_info[0:3]
+        transform = dataset_info[4:]
+        except_root_info = [name, datapoints, split] + transform
+        name = hashlib.md5(str(except_root_info).encode()).hexdigest() + '.pickle'
+        return name
+        
 
     def feature_to_mu_sig(self, act):
         mu = np.mean(act, axis=0)
@@ -233,6 +244,7 @@ class GenerativeModelScore:
         self.fake_mu, self.fake_sigma = self.feature_to_mu_sig(self.fake_feature_np)
     
     def clear_fake(self) : 
+        self.fake_images = None
         self.fake_predict_softmax = None
         self.fake_feature = None
         self.fake_mu, self.fake_sigma = None, None
